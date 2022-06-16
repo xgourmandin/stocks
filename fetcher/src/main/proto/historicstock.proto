@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "org.xgo.fetcher.adapters.rpc";
+option java_outer_classname = "StocksProto";
+
+package stocks;
+
+service HistoricStocks {
+  rpc  InitStock (HistoricStockRequest) returns (HistoricStockResponse) {}
+}
+
+message HistoricStockRequest {
+  string symbol = 1;
+}
+
+message HistoricStockResponse {
+  message StockPrice {
+    int64 timestamp = 1;
+    double open = 2;
+    double high = 3;
+    double low = 4;
+    double close = 5;
+    int64 volume = 6;
+  }
+  string symbol = 1;
+  repeated StockPrice prices = 2;
+}
+
